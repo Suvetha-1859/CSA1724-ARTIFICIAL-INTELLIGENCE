@@ -1,0 +1,34 @@
+<div class="notebook">
+
+<div class="nb-cell program" name="p1">
+% Facts about birds that can fly or cannot fly.
+bird(parrot).
+bird(eagle).
+bird(penguin).
+bird(ostrich).
+
+can_fly(parrot).
+can_fly(eagle).
+
+cannot_fly(penguin).
+cannot_fly(ostrich).
+
+% Report whether a particular bird can fly.
+flight_status(Bird, can_fly) :-
+    can_fly(Bird).
+
+flight_status(Bird, cannot_fly) :-
+    cannot_fly(Bird).
+
+% Query examples:
+% ?- flight_status(eagle, Status).
+% Status = can_fly.
+
+% ?- flight_status(penguin, Status).
+% Status = cannot_fly.
+
+% ?- flight_status(Bird, can_fly).
+% Lists birds that can fly.
+</div>
+
+</div>
