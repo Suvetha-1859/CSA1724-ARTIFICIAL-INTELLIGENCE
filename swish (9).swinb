@@ -1,0 +1,51 @@
+<div class="notebook">
+
+<div class="nb-cell program" name="p1">
+% edge(Node1, Node2).
+edge(a, b).
+edge(a, c).
+edge(b, d).
+edge(b, e).
+edge(c, f).
+edge(c, g).
+edge(d, h).
+edge(e, h).
+edge(f, h).
+edge(g, h).
+
+% heuristic(Node, EstimatedDistanceToGoal).
+heuristic(a, 7).
+heuristic(b, 6).
+heuristic(c, 4).
+heuristic(d, 5).
+heuristic(e, 3).
+heuristic(f, 2).
+heuristic(g, 3).
+heuristic(h, 0).
+
+best_first(Start, Goal, Path) :-
+    search([[Start]], Goal, [], ReversedPath),
+    reverse(ReversedPath, Path).
+
+search([[Goal | Rest] | _], Goal, _, [Goal | Rest]).
+search([[Current | Rest] | Paths], Goal, Visited, Solution) :-
+    findall(
+        [Next, Current | Rest],
+        (edge(Current, Next), \+ member(Next, [Current | Rest]),
+         \+ member(Next, Visited)),
+        NewPaths
+    ),
+    append(Paths, NewPaths, AllPaths),
+    sort_paths(AllPaths, SortedPaths),
+    search(SortedPaths, Goal, [Current | Visited], Solution).
+
+sort_paths(Paths, SortedPaths) :-
+    map_list_to_pairs(path_heuristic, Paths, Pairs),
+    keysort(Pairs, SortedPairs),
+    pairs_values(SortedPairs, SortedPaths).
+
+path_heuristic([Node | _], H) :-
+    heuristic(Node, H).
+</div>
+
+</div>
