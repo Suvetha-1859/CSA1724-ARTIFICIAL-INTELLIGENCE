@@ -1,0 +1,24 @@
+<div class="notebook">
+
+<div class="nb-cell program" name="p1">
+initial_state(state(door, middle, no)).
+
+move(state(door, Box, HasBanana), walk(door, middle),
+     state(middle, Box, HasBanana)).
+move(state(middle, Box, HasBanana), walk(middle, door),
+     state(door, Box, HasBanana)).
+
+move(state(middle, middle, no), climb_and_grab,
+     state(middle, middle, yes)).
+
+solve(State, Actions) :-
+    solve_state(State, [State], Actions).
+
+solve_state(state(_, _, yes), _, []).
+solve_state(State, Visited, [Action | Actions]) :-
+    move(State, Action, NextState),
+    \+ member(NextState, Visited),
+    solve_state(NextState, [NextState | Visited], Actions).
+</div>
+
+</div>
