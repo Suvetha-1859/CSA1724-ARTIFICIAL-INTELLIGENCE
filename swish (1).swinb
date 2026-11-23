@@ -1,0 +1,32 @@
+<div class="notebook">
+
+<div class="nb-cell program" name="p1">
+% student(StudentID, StudentName).
+student(s1, alice).
+student(s2, bob).
+
+% teacher(TeacherID, TeacherName).
+teacher(t1, smith).
+teacher(t2, jones).
+
+% subject(SubjectCode, SubjectName).
+subject(sub101, mathematics).
+subject(sub102, science).
+
+% teaches(TeacherID, SubjectCode).
+teaches(t1, sub101).
+teaches(t2, sub102).
+
+% studies(StudentID, SubjectCode).
+studies(s1, sub101).
+studies(s2, sub102).
+
+% student_teacher_subject(StudentName, TeacherName, SubjectCode).
+student_teacher_subject(Student, Teacher, Code) :-
+    student(StudentID, Student),
+    studies(StudentID, Code),
+    teaches(TeacherID, Code),
+    teacher(TeacherID, Teacher).
+</div>
+
+</div>
