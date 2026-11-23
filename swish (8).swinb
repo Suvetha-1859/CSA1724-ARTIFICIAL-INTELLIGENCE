@@ -1,0 +1,17 @@
+<div class="notebook">
+
+<div class="nb-cell program" name="p1">
+% Facts: fruit(Name, Color).
+fruit(apple, red).
+fruit(banana, yellow).
+fruit(orange, orange).
+fruit(grape, purple).
+fruit(pear, green).
+
+% Query all fruits and colors using backtracking:
+% ?- fruit(Fruit, Color).
+%
+% Press ; after each answer to see the next one.
+</div>
+
+</div>
