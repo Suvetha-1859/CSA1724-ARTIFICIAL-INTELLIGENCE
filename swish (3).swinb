@@ -1,0 +1,18 @@
+<div class="notebook">
+
+<div class="nb-cell program" name="p1">
+% hanoi(N, From, To, Auxiliary) prints the moves needed to move
+% N disks from From to To, using Auxiliary.
+
+hanoi(1, From, To, _) :-
+    format('Move disk from ~w to ~w~n', [From, To]).
+
+hanoi(N, From, To, Auxiliary) :-
+    N &gt; 1,
+    N1 is N - 1,
+    hanoi(N1, From, Auxiliary, To),
+    format('Move disk from ~w to ~w~n', [From, To]),
+    hanoi(N1, Auxiliary, To, From).
+</div>
+
+</div>
