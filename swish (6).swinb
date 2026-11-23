@@ -1,0 +1,26 @@
+<div class="notebook">
+
+<div class="nb-cell program" name="p1">
+% diet_suggestion(Disease, Suggestion).
+
+diet_suggestion(diabetes,
+    'Choose balanced meals and limit sugary foods and drinks').
+
+diet_suggestion(high_blood_pressure,
+    'Choose lower-sodium foods, such as fruits, vegetables, and whole grains').
+
+diet_suggestion(high_cholesterol,
+    'Choose foods with more fiber and limit saturated fats').
+
+diet_suggestion(anemia,
+    'Include iron-rich foods, such as beans, lentils, and leafy greens').
+
+diet_suggestion(obesity,
+    'Choose balanced portions of vegetables, fruits, whole grains, and protein').
+
+% Query rule
+suggest_diet(Disease, Suggestion) :-
+    diet_suggestion(Disease, Suggestion).
+</div>
+
+</div>
