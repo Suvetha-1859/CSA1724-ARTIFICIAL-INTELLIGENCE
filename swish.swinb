@@ -1,0 +1,14 @@
+<div class="notebook">
+
+<div class="nb-cell program" name="p1">
+
+person(alex, date(1990, 5, 12)).
+person(jamie, date(1985, 11, 3)).
+person(taylor, date(2001, 2, 24)).
+
+% Query a person's date of birth:
+% ?- person(alex, DOB).
+% DOB = date(1990, 5, 12).
+</div>
+
+</div>
