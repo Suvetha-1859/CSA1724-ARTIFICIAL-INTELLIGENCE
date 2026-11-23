@@ -1,0 +1,38 @@
+<div class="notebook">
+
+<div class="nb-cell program" name="p1">
+% Parent relationships: parent(Parent, Child).
+parent(john, mary).
+parent(john, david).
+parent(mary, alice).
+parent(mary, peter).
+parent(david, sophia).
+
+% Gender facts.
+male(john).
+male(david).
+male(peter).
+female(mary).
+female(alice).
+female(sophia).
+
+% Family relationships.
+father(Father, Child) :-
+    parent(Father, Child),
+    male(Father).
+
+mother(Mother, Child) :-
+    parent(Mother, Child),
+    female(Mother).
+
+sibling(Person1, Person2) :-
+    parent(Parent, Person1),
+    parent(Parent, Person2),
+    Person1 \= Person2.
+
+grandparent(Grandparent, Child) :-
+    parent(Grandparent, Parent),
+    parent(Parent, Child).
+</div>
+
+</div>
