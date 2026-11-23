@@ -1,0 +1,16 @@
+<div class="notebook">
+
+<div class="nb-cell program" name="p1">
+% planet(Name, Type, DistanceFromSunInMillionKm, NumberOfMoons).
+
+planet(mercury, terrestrial, 57.9, 0).
+planet(venus, terrestrial, 108.2, 0).
+planet(earth, terrestrial, 149.6, 1).
+planet(mars, terrestrial, 227.9, 2).
+planet(jupiter, gas_giant, 778.6, 95).
+planet(saturn, gas_giant, 1433.5, 146).
+planet(uranus, ice_giant, 2872.5, 28).
+planet(neptune, ice_giant, 4495.1, 16).
+</div>
+
+</div>
