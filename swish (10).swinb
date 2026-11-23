@@ -1,0 +1,30 @@
+<div class="notebook">
+
+<div class="nb-cell program" name="p1">
+% Symptoms reported by each person
+symptom(alex, fever).
+symptom(alex, cough).
+symptom(alex, body_ache).
+
+symptom(sam, sneeze).
+symptom(sam, runny_nose).
+symptom(sam, cough).
+
+% Diagnosis rules
+diagnosis(Person, flu) :-
+    symptom(Person, fever),
+    symptom(Person, cough),
+    symptom(Person, body_ache).
+
+diagnosis(Person, common_cold) :-
+    symptom(Person, sneeze),
+    symptom(Person, runny_nose),
+    symptom(Person, cough).
+
+diagnosis(Person, allergy) :-
+    symptom(Person, sneeze),
+    symptom(Person, runny_nose),
+    \+ symptom(Person, fever).
+</div>
+
+</div>
