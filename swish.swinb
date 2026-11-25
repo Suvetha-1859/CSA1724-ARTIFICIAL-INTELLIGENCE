@@ -1,14 +1,47 @@
 <div class="notebook">
 
 <div class="nb-cell program" name="p1">
+% Initial facts
+fact(parent(alice, bob)).
+fact(parent(bob, carol)).
+fact(parent(carol, david)).
 
-person(alex, date(1990, 5, 12)).
-person(jamie, date(1985, 11, 3)).
-person(taylor, date(2001, 2, 24)).
+% Rule: if X is a parent of Y, then X is an ancestor of Y.
+rule(ancestor(X, Y), [parent(X, Y)]).
 
-% Query a person's date of birth:
-% ?- person(alex, DOB).
-% DOB = date(1990, 5, 12).
+% Rule: if X is a parent of Z, and Z is an ancestor of Y,
+% then X is an ancestor of Y.
+rule(ancestor(X, Y), [parent(X, Z), ancestor(Z, Y)]).
+
+% Start forward chaining with the facts, then apply rules.
+forward_chain :-
+    findall(F, fact(F), Facts),
+    chain_until_stable(Facts, FinalFacts),
+    assert_all(FinalFacts).
+
+chain_until_stable(Facts, FinalFacts) :-
+    findall(NewFact,
+        ( rule(NewFact, Conditions),
+          conditions_hold(Conditions, Facts),
+          \+ member(NewFact, Facts)
+        ),
+        NewFacts),
+    ( NewFacts = [] -&gt;
+        FinalFacts = Facts
+    ;
+        append(Facts, NewFacts, UpdatedFacts),
+        chain_until_stable(UpdatedFacts, FinalFacts)
+    ).
+
+conditions_hold([], _).
+conditions_hold([Condition | Rest], Facts) :-
+    member(Condition, Facts),
+    conditions_hold(Rest, Facts).
+
+assert_all([]).
+assert_all([Fact | Rest]) :-
+    ( fact(Fact) -&gt; true ; assertz(fact(Fact)) ),
+    assert_all(Rest).
 </div>
 
 </div>
