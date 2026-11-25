@@ -1,0 +1,42 @@
+<div class="notebook">
+
+<div class="nb-cell program" name="p1">
+% Starting facts
+initial_facts([
+    parent(alice, bob),
+    parent(bob, carol),
+    parent(carol, david)
+]).
+
+% Forward-chaining rules
+rule(ancestor(X, Y), [parent(X, Y)]).
+rule(ancestor(X, Y), [parent(X, Z), ancestor(Z, Y)]).
+
+% Run forward chaining and return all known facts
+forward_chain(AllFacts) :-
+    initial_facts(Facts),
+    derive_until_stable(Facts, AllFacts).
+
+derive_until_stable(Facts, FinalFacts) :-
+    findall(NewFact,
+        ( rule(NewFact, Conditions),
+          conditions_hold(Conditions, Facts),
+          \+ member(NewFact, Facts)
+        ),
+        Candidates),
+    sort(Candidates, NewFacts),
+    ( NewFacts = [] -&gt;
+        FinalFacts = Facts
+    ;
+        append(Facts, NewFacts, UpdatedFacts),
+        derive_until_stable(UpdatedFacts, FinalFacts)
+    ).
+
+conditions_hold([], _).
+conditions_hold([Condition | Rest], Facts) :-
+    member(KnownFact, Facts),
+    Condition = KnownFact,
+    conditions_hold(Rest, Facts).
+</div>
+
+</div>
